@@ -33,7 +33,34 @@ You need to regenerate the type definitions when building or deploying the appli
 
 ## Seeding
 
-- add ts-none `pnpm install -D ts-node`
+- add ts-node `pnpm install -D ts-node`
 - create `prisma/seed.ts` and fill it out
 - add a prisma section in package.json
 - run `pnpm prisma db seed`
+
+## Using
+
+You need a prisma client.
+Instead of creating one in every file, we use singleton.
+Like in file `lib/prisma.ts`
+
+Then in a server component:
+
+- `import prisma`
+- `let users = await prisma.user.findMany()`
+
+## Endpoints
+
+`app/api/users/route.ts`
+
+```ts
+import prisma
+import NextResponse
+
+export async function GET(request: NextRequest) {
+    const users = await prisma.user.findMany();
+    return NextResponse.json(users)
+}
+```
+
+etc

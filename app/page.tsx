@@ -1,9 +1,10 @@
-import Image from "next/image";
+import UserList from "./components/UserList";
 
 export default function Home() {
   return (
-    <main className="">
+    <div className="container">
       <h1>Using Prisma.</h1>
-    </main>
+      <UserList />
+    </div>
   );
 }
