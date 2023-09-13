@@ -1,14 +1,13 @@
 "use client";
 
+import { User } from "@prisma/client";
 import { useState, useEffect } from "react";
 import Select, { ClassNamesConfig, ThemeConfig } from "react-select";
 
-const TaskForm = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+const TaskForm = ({ users }: { users: User[] }) => {
+  const userOptions = users.map((user) => {
+    return { value: user.id, label: user.name };
+  });
 
   return (
     <form className="form">
@@ -17,7 +16,7 @@ const TaskForm = () => {
         <input type="text" className="formInput" />
       </label>
       <Select
-        options={options}
+        options={userOptions}
         isClearable={false}
         placeholder="Pick an employee"
         styles={{
@@ -39,6 +38,10 @@ const TaskForm = () => {
             ...baseStyles,
             backgroundColor: state.isFocused ? "darkgray" : "black",
           }),
+        }}
+        classNames={{
+          control: (state) =>
+            state.isFocused ? "border-red-600" : "border-grey-300",
         }}
       ></Select>
       <button className="btn btn--primary">Add task</button>

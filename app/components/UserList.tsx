@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import TaskList from "./TaskList";
+import { User } from "@prisma/client";
 
-const UserList = async () => {
-  const users = await prisma.user.findMany();
+const UserList = async ({ users }: { users: User[] }) => {
   return (
     <div className="container flex flex-col gap-4">
       {users.length !== 0 ? (
