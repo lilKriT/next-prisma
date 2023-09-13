@@ -25,15 +25,42 @@
   }
 
   .userCard {
-    @apply border border-white/10 p-4 rounded-lg;
-    @apply duration-150 ease-in-out hover:bg-neutral-900;
+    @apply border border-white/10 p-4 rounded-lg relative;
+    @apply duration-150 ease-in-out;
+    @apply hover:shadow-[0_0_25px_5px] hover:shadow-sky-500/30;
   }
 
   .taskCard {
-    @apply bg-gradient-to-l from-white/0 via-white/0 to-white/10 border border-sky-500/30;
-    @apply p-2 rounded-lg;
+    @apply bg-transparent hover:bg-white/10 border border-sky-500/30;
+    @apply p-2 rounded-lg duration-150 ease-in-out;
+  }
+
+  .form {
+    @apply w-full max-w-xl border border-sky-500/30;
+    @apply flex flex-col gap-4 p-4 mt-8 mx-auto rounded-xl;
+  }
+
+  .formLabel {
+    @apply text-lg w-full flex items-center gap-2;
+  }
+
+  .formInput {
+    @apply bg-transparent border border-sky-500/30 p-2 grow;
+  }
+
+  .formSelect {
+    @apply bg-transparent;
+  }
+
+  .btn {
+  }
+
+  .btn--primary {
   }
 }
 
 @layer utilities {
+  .gradientText {
+    @apply bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text;
+  }
 }
