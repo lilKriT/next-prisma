@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-neutral-950 text-neutral-50;
+  }
+}
+
+@layer components {
+  .logo {
+    @apply p-2;
+    @apply duration-150 ease-in-out hover:scale-110;
+  }
+
+  .navLink {
+    @apply px-4 py-2 flex;
+    @apply duration-150 ease-in-out hover:scale-110;
+  }
+
+  .link {
+    @apply inline-flex bg-gradient-to-r from-sky-500 to-emerald-500 text-transparent bg-clip-text;
+    @apply duration-150 ease-in-out hover:-translate-y-1;
+  }
+
+  .userCard {
+    @apply border border-white/10 p-4 rounded-lg;
+    @apply duration-150 ease-in-out hover:bg-neutral-900;
+  }
+
+  .taskCard {
+    @apply bg-gradient-to-l from-white/0 via-white/0 to-white/10 border border-sky-500/30;
+    @apply p-2 rounded-lg;
+  }
+}
+
+@layer utilities {
+}
