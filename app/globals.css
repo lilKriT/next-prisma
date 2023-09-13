@@ -53,9 +53,12 @@
   }
 
   .btn {
+    @apply self-center px-4 py-2 rounded-lg text-neutral-950 tracking-wide font-bold;
+    @apply duration-150 ease-in-out hover:rounded-[1rem];
   }
 
   .btn--primary {
+    @apply bg-sky-500;
   }
 }
 
