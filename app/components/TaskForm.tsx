@@ -18,18 +18,26 @@ const TaskForm = () => {
       </label>
       <Select
         options={options}
+        isClearable={false}
+        placeholder="Pick an employee"
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
             backgroundColor: "black",
+            borderColor: "darkcyan",
           }),
+          singleValue: (baseStyles, state) => ({
+            ...baseStyles,
+            color: "white",
+          }),
+
           menu: (baseStyles, state) => ({
             ...baseStyles,
             backgroundColor: "black",
           }),
           option: (baseStyles, state) => ({
             ...baseStyles,
-            backgroundColor: state.isFocused ? "gray" : "black",
+            backgroundColor: state.isFocused ? "darkgray" : "black",
           }),
         }}
       ></Select>
