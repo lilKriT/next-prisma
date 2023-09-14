@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div className="container">
-      <h1 className="text-4xl text-center  mb-8 ">
+      <h1 className="text-4xl text-center mb-8 ">
         Current{" "}
         <span className="gradientText font-bold tracking-widest">goals</span>:
       </h1>

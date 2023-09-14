@@ -33,7 +33,7 @@
   .taskCard {
     @apply flex justify-between items-center;
     @apply bg-transparent hover:bg-white/10 border border-sky-500/30;
-    @apply p-2 rounded-lg duration-150 ease-in-out;
+    @apply px-4 py-2 rounded-lg duration-150 ease-in-out;
   }
 
   .form {
@@ -57,6 +57,10 @@
 
   .btn--primary {
     @apply bg-sky-500;
+  }
+
+  .btn--success {
+    @apply bg-emerald-500;
   }
 
   .btn--danger {
