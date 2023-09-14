@@ -64,3 +64,9 @@ export async function GET(request: NextRequest) {
 ```
 
 etc
+
+## Generating keys / secrets:
+
+In **powershell** use:
+`(new-guid).guid`
+it will return plain text.
