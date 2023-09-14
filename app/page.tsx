@@ -1,9 +1,9 @@
-import { prisma } from "@/lib/prisma";
+import { usePrisma } from "@/lib/prisma";
 import TaskForm from "./components/TaskForm";
 import UserList from "./components/UserList";
 
 export default async function Home() {
-  const users = await prisma.user.findMany();
+  const users = await usePrisma.user.findMany();
 
   return (
     <div className="container">

@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { usePrisma } from "@/lib/prisma";
 import TaskCard from "./TaskCard";
 
 const TaskList = async ({ userId }: { userId: number }) => {
-  const tasks = await prisma.task.findMany({ where: { userId } });
+  const tasks = await usePrisma.task.findMany({ where: { userId } });
 
   const deleteTask = async () => {
     console.log("Deleting");

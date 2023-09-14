@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { usePrisma } from "@/lib/prisma";
 import TaskList from "./TaskList";
 import { User } from "@prisma/client";
 
