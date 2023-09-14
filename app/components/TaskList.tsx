@@ -6,7 +6,11 @@ const TaskList = async ({ userId }: { userId: number }) => {
     <div className="ml-2">
       <div className="flex flex-col gap-2 mt-4">
         {tasks.length !== 0 ? (
-          tasks.map((task) => <div className="taskCard">{task.title}</div>)
+          tasks.map((task) => (
+            <div className="taskCard" key={task.id}>
+              {task.title}
+            </div>
+          ))
         ) : (
           <p>No tasks yet.</p>
         )}
