@@ -31,6 +31,7 @@
   }
 
   .taskCard {
+    @apply flex justify-between items-center;
     @apply bg-transparent hover:bg-white/10 border border-sky-500/30;
     @apply p-2 rounded-lg duration-150 ease-in-out;
   }
@@ -56,6 +57,14 @@
 
   .btn--primary {
     @apply bg-sky-500;
+  }
+
+  .btn--danger {
+    @apply bg-red-500 text-neutral-50;
+  }
+
+  .btn--small {
+    @apply p-1 rounded-sm hover:rounded-sm hover:scale-105 text-sm;
   }
 }
 

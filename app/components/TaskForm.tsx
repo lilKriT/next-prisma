@@ -32,13 +32,18 @@ const TaskForm = ({ users }: { users: User[] }) => {
     }
 
     try {
-      await fetch(`${url}/api/tasks`, {
+      const res = await fetch(`${url}/api/tasks`, {
         method: "POST",
         body: JSON.stringify({ title, userId: employee.value }),
       });
+      if (res.ok) {
+        console.log("All good");
+      } else {
+        console.log("Not good");
+      }
       router.refresh();
     } catch (error) {
-      console.error(error);
+      console.log("Something wrong");
     }
     console.log("Submitted");
   };
@@ -52,6 +57,7 @@ const TaskForm = ({ users }: { users: User[] }) => {
           className="formInput"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
       </label>
       <Select
@@ -64,6 +70,7 @@ const TaskForm = ({ users }: { users: User[] }) => {
             setEmployee({ value: option.value, label: option.label });
           }
         }}
+        required
         value={employee || undefined}
         styles={{
           control: (baseStyles, state) => ({
