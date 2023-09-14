@@ -11,10 +11,11 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  role  String
-  tasks Task[]
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  role         String
+  tasks        Task[]
+  refreshToken String?
 }
 
 model Task {
