@@ -2,7 +2,8 @@ import { usePrisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify, SignJWT } from "jose";
 
-export const POST = async (request: NextRequest) => {
+// TODO: this can be GET apparently?
+export const GET = async (request: NextRequest) => {
   // Get cookies and open refresh token
   const token = request.cookies.get("refreshToken")?.value;
   if (!token) {
