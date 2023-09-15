@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const url = "http://localhost:3000";
 
@@ -10,25 +11,22 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState,
-    formState: { errors, isSubmitting, isSubmitSuccessful, isDirty },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     getValues,
     reset,
     setError,
     clearErrors,
   } = useForm();
+  const router = useRouter();
 
   const registerUser: SubmitHandler<FieldValues> = async (
     data: FieldValues
   ) => {
-    console.log("Using hookform: ", data);
-    // console.log("Errors:", errors);
-
+    // Simulate slowdown?
     const throttle = true;
     if (throttle) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    console.log("Submitting");
 
     const res = await fetch(`${url}/api/users/register`, {
       method: "POST",
@@ -40,37 +38,24 @@ const Register = () => {
       setError("nameTaken", { message: "User already exists." });
     }
     const json = await res.json();
-  };
-
-  const testRegister: SubmitHandler<FieldValues> = async (
-    data: FieldValues
-  ) => {
-    console.log("Trying");
-    setError("nameTaken", { message: "User already exists." });
-  };
-
-  const onError: SubmitHandler<FieldValues> = async (data: FieldValues) => {
-    console.log("Error");
-    setError("nameTaken", { message: "User already exists." });
+    return json;
   };
 
   // Reset form if success
   useEffect(() => {
-    // console.log("Effect");
     if (isSubmitSuccessful) {
       reset({
         name: "",
         password: "",
         confirmPassword: "",
       });
-    } else {
-      // console.log("Not succesful");
+      router.push("/"); // Where to send user?
     }
-  }, [formState, isSubmitSuccessful, reset]);
+  }, [isSubmitSuccessful]);
 
   return (
     <div className="container flex items-center">
-      <form className="form" onSubmit={handleSubmit(registerUser, onError)}>
+      <form className="form" onSubmit={handleSubmit(registerUser)}>
         {/* Name */}
         <label className="formLabel formLabel--columns">
           Name:
@@ -133,7 +118,7 @@ const Register = () => {
         >
           Register
         </button>
-        <p className="text-center">
+        <p className="text-center text-sm">
           Already have an account?{" "}
           <Link href={"/login"} className="link">
             Log in!

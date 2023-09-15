@@ -8,8 +8,8 @@ import { Providers } from "@/lib/context/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Prisma in Next",
-  description: "Created by lilKriT.",
+  title: "Get it Done!",
+  description: "A task list Created by lilKriT using Next.js and Prisma.",
 };
 
 export default function RootLayout({
