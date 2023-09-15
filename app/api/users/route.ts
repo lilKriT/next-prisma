@@ -29,8 +29,9 @@ export const POST = async (request: NextRequest) => {
   if (passwordMatches) {
     // Get roles
     const role = user.role;
+
     // Create access token
-    const encodedSecret = new TextEncoder().encode(process.env.SECRET);
+    const accessSecret = new TextEncoder().encode(process.env.ACCESS_SECRET);
     const accessToken = await new SignJWT({
       name: user.name,
       role: role,
@@ -38,16 +39,16 @@ export const POST = async (request: NextRequest) => {
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
       .setExpirationTime("10s")
-      .sign(encodedSecret);
+      .sign(accessSecret);
 
     // Create refresh token
-
+    const refreshSecret = new TextEncoder().encode(process.env.REFRESH_SECRET);
     const refreshToken = await new SignJWT({
       name: user.name,
     })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("1d")
-      .sign(encodedSecret);
+      .sign(refreshSecret);
 
     // Save refresh token in db
     await usePrisma.user.update({
@@ -59,7 +60,6 @@ export const POST = async (request: NextRequest) => {
 
     // Save refresh token as http only cookie
     const cookieStore = cookies();
-    console.log(cookieStore);
     cookieStore.set("refreshToken", refreshToken, {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 1000,
@@ -68,7 +68,6 @@ export const POST = async (request: NextRequest) => {
     // Return access token
     return NextResponse.json({ msg: "Logged in.", accessToken, role });
   } else {
-    console.log("No log");
-    return NextResponse.json({ msg: "Log In" });
+    return NextResponse.json({ error: "Invalid password." }, { status: 400 });
   }
 };
