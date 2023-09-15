@@ -4,13 +4,21 @@ import bcrypt from "bcrypt";
 
 export const POST = async (request: NextRequest) => {
   const json = await request.json();
-  console.log(json);
 
   if (!json.name || !json.password) {
     return NextResponse.json({ error: "Provide all data." }, { status: 400 });
   }
 
-  // I think I can skip on finding if user exists?
+  const userExists = await usePrisma.user.findFirst({
+    where: { name: json.name },
+  });
+  if (userExists) {
+    return NextResponse.json(
+      { error: "User with this name already exists." },
+      { status: 400 }
+    );
+  }
+
   try {
     const hashed = await bcrypt.hash(json.password, 10);
     const userData = { name: json.name, password: hashed };

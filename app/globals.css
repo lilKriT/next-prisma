@@ -45,8 +45,12 @@
     @apply text-lg w-full flex items-center gap-2;
   }
 
+  .formLabel--columns {
+    @apply flex-col items-start;
+  }
+
   .formInput {
-    @apply bg-transparent border border-sky-500/30 p-2 grow rounded-lg;
+    @apply bg-transparent border border-sky-500/30 p-2 grow rounded-lg w-full;
   }
 
   .btn {

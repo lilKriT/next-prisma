@@ -13,18 +13,13 @@ const Header = () => {
         </div>
         <menu className="flex gap-2 justify-end">
           <li>
-            <a href="/profile" className="navLink">
-              Profile
+            <a href="/login" className="navLink">
+              Log In
             </a>
           </li>
           <li>
-            <a href="/admin" className="navLink">
-              Admin
-            </a>
-          </li>
-          <li>
-            <a href="/secrets" className="navLink">
-              Secrets
+            <a href="/register" className="navLink">
+              Register
             </a>
           </li>
         </menu>
