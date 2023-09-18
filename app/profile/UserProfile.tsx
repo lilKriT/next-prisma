@@ -2,7 +2,7 @@
 
 import { useAuthContext } from "@/lib/context/provider";
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 const UserProfile = () => {
   const { name, role } = useAuthContext();
@@ -30,7 +30,7 @@ const UserProfile = () => {
       ) : (
         <ul>
           <li>Create and assing tasks to yourself</li>
-          <li>View other's tasks.</li>
+          <li>{"View other's tasks."}</li>
         </ul>
       )}
     </>

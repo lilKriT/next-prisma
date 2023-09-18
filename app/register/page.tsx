@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Metadata } from "next";
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 export const metadata: Metadata = {
   title: "Register",

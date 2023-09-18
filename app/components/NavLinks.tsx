@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 const NavLinks = () => {
   const { role, setRole, setAccessToken } = useAuthContext();

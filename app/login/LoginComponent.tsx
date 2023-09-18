@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 const LoginComponent = () => {
   const {

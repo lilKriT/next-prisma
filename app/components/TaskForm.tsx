@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Select, { ClassNamesConfig, ThemeConfig } from "react-select";
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 const TaskForm = ({ users }: { users: User[] }) => {
   const [title, setTitle] = useState("");

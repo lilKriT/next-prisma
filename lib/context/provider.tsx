@@ -31,7 +31,7 @@ const AuthContext = createContext<IAuthContext>({
 });
 // I can separate this into two files
 
-const url = "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_URL;
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const [id, setId] = useState("");
