@@ -19,7 +19,7 @@ const LoginComponent = () => {
 
   const router = useRouter();
 
-  const { setRole, setAccessToken } = useAuthContext();
+  const { setName, setRole, setAccessToken } = useAuthContext();
 
   const loginUser = async (data: FieldValues) => {
     // Simulate slowdown?
@@ -39,6 +39,7 @@ const LoginComponent = () => {
       const json = await res.json();
 
       // console.log(`Role: ${json.role}, accessToken: ${json.accessToken}`);
+      setName(json.name);
       setRole(json.role);
       setAccessToken(json.accessToken);
       //   return json;

@@ -15,7 +15,17 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // No refresh token:
+  if (!refreshToken) {
+    const redirectFrom = ["/profile"];
+    if (redirectFrom.includes(request.nextUrl.pathname)) {
+      console.log("User not logged in, no access!");
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
   // This is very important, otherwise there will be a reload every navigation!
   // Apparently I don't know if this is the problem.
+  // It seems like this whole "reload" is just a FOUC!
   return NextResponse.next();
 }

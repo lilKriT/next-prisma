@@ -28,6 +28,7 @@ export const POST = async (request: NextRequest) => {
   const passwordMatches = await bcrypt.compare(password, user.password);
   if (passwordMatches) {
     // Get roles
+    const name = user.name;
     const role = user.role;
 
     // Create access token
@@ -66,7 +67,7 @@ export const POST = async (request: NextRequest) => {
     });
     // Do I need other options, like "secure" or "path"?
     // Return access token
-    return NextResponse.json({ msg: "Logged in.", accessToken, role });
+    return NextResponse.json({ msg: "Logged in.", accessToken, name, role });
   } else {
     return NextResponse.json({ error: "Invalid password." }, { status: 400 });
   }

@@ -9,6 +9,8 @@ import React, {
 } from "react";
 
 interface IAuthContext {
+  name: string | null;
+  setName: React.Dispatch<React.SetStateAction<string>>;
   role: string | null;
   setRole: React.Dispatch<React.SetStateAction<string>>;
   accessToken: string | null;
@@ -16,6 +18,8 @@ interface IAuthContext {
 }
 
 const AuthContext = createContext<IAuthContext>({
+  name: null,
+  setName: () => {},
   role: null,
   setRole: () => {},
   accessToken: null,
@@ -26,6 +30,7 @@ const AuthContext = createContext<IAuthContext>({
 const url = "http://localhost:3000";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
+  const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [isLoading, setIsLoading] = useState(true); // True or false?
@@ -63,7 +68,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <AuthContext.Provider
-        value={{ role, setRole, accessToken, setAccessToken }}
+        value={{ name, setName, role, setRole, accessToken, setAccessToken }}
       >
         {/* {!isLoading ? children : ""} */}
         {children}
