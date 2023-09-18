@@ -1,5 +1,6 @@
 import Link from "next/link";
 import UserGreeting from "./UserGreeting";
+import NavLinks from "./NavLinks";
 
 const Header = () => {
   return (
@@ -13,18 +14,9 @@ const Header = () => {
         <div className="justify-self-center self-center">
           <UserGreeting />
         </div>
-        <menu className="flex gap-2 justify-end">
-          <li>
-            <a href="/login" className="navLink">
-              Log In
-            </a>
-          </li>
-          <li>
-            <a href="/register" className="navLink">
-              Register
-            </a>
-          </li>
-        </menu>
+        <div>
+          <NavLinks />
+        </div>
       </div>
     </header>
   );

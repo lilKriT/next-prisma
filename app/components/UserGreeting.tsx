@@ -1,7 +1,21 @@
+"use client";
+
+import { useAuthContext } from "@/lib/context/provider";
 import React from "react";
 
 const UserGreeting = () => {
-  return <div>You are currently not logged in.</div>;
+  const { role } = useAuthContext();
+  return (
+    <div>
+      <p>
+        {role === "Admin"
+          ? "Hello, admin."
+          : role === "User"
+          ? "Hello, user."
+          : "Hello, guest."}
+      </p>
+    </div>
+  );
 };
 
 export default UserGreeting;
