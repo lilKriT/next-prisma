@@ -38,7 +38,7 @@ export const POST = async (request: NextRequest) => {
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
-      .setExpirationTime("10s")
+      .setExpirationTime("10s") // whether it's 10s or 10m, the flashes happen immediately!
       .sign(accessSecret);
 
     // Create refresh token

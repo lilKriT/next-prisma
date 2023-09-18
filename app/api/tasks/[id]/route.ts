@@ -1,4 +1,5 @@
 import { usePrisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -51,6 +52,7 @@ export async function DELETE(
   }
   try {
     const task = await usePrisma.task.delete({ where: { id: +id } });
+    revalidatePath("/");
     return NextResponse.json({ task });
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 });

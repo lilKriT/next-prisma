@@ -32,10 +32,12 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     console.log("Provider effect happens here.");
-    setIsLoading(true);
 
     const refresh = async () => {
+      setIsLoading(true);
       try {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
         const res = await fetch(`${url}/api/users/refresh`, {
           method: "GET",
         });
@@ -56,14 +58,15 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <>
       <AuthContext.Provider
         value={{ role, setRole, accessToken, setAccessToken }}
       >
-        {!isLoading ? children : ""}
+        {/* {!isLoading ? children : ""} */}
+        {children}
       </AuthContext.Provider>
     </>
   );

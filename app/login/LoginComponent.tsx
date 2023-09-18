@@ -55,7 +55,7 @@ const LoginComponent = () => {
       });
       router.push("/"); // Where to send user?
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, reset, router]);
 
   return (
     <form className="form" onSubmit={handleSubmit(loginUser)}>
@@ -98,7 +98,7 @@ const LoginComponent = () => {
         Log In
       </button>
       <p className="text-center text-sm">
-        You don't have an account?{" "}
+        {"You don't have an account? "}
         <Link href={"/register"} className="link">
           Register!
         </Link>

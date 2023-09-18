@@ -28,15 +28,20 @@ const NavLinks = () => {
 
   return (
     <menu className="flex gap-2 justify-end">
+      <li>
+        <Link href={"/profile"} className="navLink" prefetch>
+          Profile
+        </Link>
+      </li>
       {!role ? (
         <>
           <li>
-            <Link href={"/login"} className="navLink">
+            <Link href={"/login"} className="navLink" prefetch>
               Log In
             </Link>
           </li>
           <li>
-            <Link href={"/register"} className="navLink">
+            <Link href={"/register"} className="navLink" prefetch>
               Register
             </Link>
           </li>

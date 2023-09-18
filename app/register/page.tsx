@@ -51,7 +51,7 @@ const Register = () => {
       });
       router.push("/"); // Where to send user?
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, reset, router]);
 
   return (
     <div className="container flex items-center">

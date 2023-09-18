@@ -1,4 +1,5 @@
 import { usePrisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const task = await usePrisma.task.create({ data: json });
+    revalidatePath("/");
     return NextResponse.json(task);
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 400 });
