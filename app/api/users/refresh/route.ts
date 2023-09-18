@@ -51,7 +51,12 @@ export const GET = async (request: NextRequest) => {
 
   // Return roles and access token
   //   return NextResponse.json({ msg: "Refresh" });
-  return NextResponse.json({ msg: "Refreshed", accessToken, role });
+  return NextResponse.json({
+    msg: "Refreshed",
+    id: user.id,
+    accessToken,
+    role,
+  });
 };
 
 // TODO: shouldn't I also send the cookie again?

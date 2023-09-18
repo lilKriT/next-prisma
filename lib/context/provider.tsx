@@ -9,6 +9,8 @@ import React, {
 } from "react";
 
 interface IAuthContext {
+  id: string | null;
+  setId: React.Dispatch<React.SetStateAction<string>>;
   name: string | null;
   setName: React.Dispatch<React.SetStateAction<string>>;
   role: string | null;
@@ -18,6 +20,8 @@ interface IAuthContext {
 }
 
 const AuthContext = createContext<IAuthContext>({
+  id: null,
+  setId: () => {},
   name: null,
   setName: () => {},
   role: null,
@@ -30,6 +34,7 @@ const AuthContext = createContext<IAuthContext>({
 const url = "http://localhost:3000";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -47,6 +52,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
           method: "GET",
         });
         const json = await res.json();
+        setId(json.id);
         setRole(json.role);
         setAccessToken(json.accessToken);
       } catch (error) {
@@ -68,7 +74,16 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <AuthContext.Provider
-        value={{ name, setName, role, setRole, accessToken, setAccessToken }}
+        value={{
+          id,
+          setId,
+          name,
+          setName,
+          role,
+          setRole,
+          accessToken,
+          setAccessToken,
+        }}
       >
         {/* {!isLoading ? children : ""} */}
         {children}

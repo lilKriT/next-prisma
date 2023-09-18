@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthContext } from "@/lib/context/provider";
+import { usePrisma } from "@/lib/prisma";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
@@ -16,6 +18,7 @@ const TaskForm = ({ users }: { users: User[] }) => {
   }>();
 
   const router = useRouter();
+  const { id, name, role } = useAuthContext();
 
   // Should this be an effect?
   const userOptions = users.map((user) => {
@@ -27,14 +30,18 @@ const TaskForm = ({ users }: { users: User[] }) => {
     e.preventDefault();
     console.log("Submitting");
 
-    if (title === "" || !employee) {
+    if (title === "") {
+      return;
+    }
+
+    if (role === "Admin" && !employee) {
       return;
     }
 
     try {
       const res = await fetch(`${url}/api/tasks`, {
         method: "POST",
-        body: JSON.stringify({ title, userId: employee.value }),
+        body: JSON.stringify({ title, userId: employee?.value || id }),
       });
       if (res.ok) {
         console.log("All good");
@@ -60,43 +67,45 @@ const TaskForm = ({ users }: { users: User[] }) => {
           required
         />
       </label>
-      <Select
-        name="taskEmployee"
-        options={userOptions}
-        isClearable={false}
-        placeholder="Pick an employee"
-        onChange={(option) => {
-          if (option) {
-            setEmployee({ value: option.value, label: option.label });
-          }
-        }}
-        required
-        value={employee || undefined}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            backgroundColor: "black",
-            borderColor: "darkcyan",
-          }),
-          singleValue: (baseStyles, state) => ({
-            ...baseStyles,
-            color: "white",
-          }),
+      {role === "Admin" && (
+        <Select
+          name="taskEmployee"
+          options={userOptions}
+          isClearable={false}
+          placeholder="Pick an employee"
+          onChange={(option) => {
+            if (option) {
+              setEmployee({ value: option.value, label: option.label });
+            }
+          }}
+          required
+          value={employee || undefined}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: "black",
+              borderColor: "darkcyan",
+            }),
+            singleValue: (baseStyles, state) => ({
+              ...baseStyles,
+              color: "white",
+            }),
 
-          menu: (baseStyles, state) => ({
-            ...baseStyles,
-            backgroundColor: "black",
-          }),
-          option: (baseStyles, state) => ({
-            ...baseStyles,
-            backgroundColor: state.isFocused ? "darkgray" : "black",
-          }),
-        }}
-        classNames={{
-          control: (state) =>
-            state.isFocused ? "border-red-600" : "border-grey-300",
-        }}
-      ></Select>
+            menu: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: "black",
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: state.isFocused ? "darkgray" : "black",
+            }),
+          }}
+          classNames={{
+            control: (state) =>
+              state.isFocused ? "border-red-600" : "border-grey-300",
+          }}
+        ></Select>
+      )}
       <button className="btn btn--primary">Add task</button>
     </form>
   );
