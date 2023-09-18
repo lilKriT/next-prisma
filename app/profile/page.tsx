@@ -1,24 +1,15 @@
-"use client";
+import { Metadata } from "next";
+import UserProfile from "./UserProfile";
 
-import { useAuthContext } from "@/lib/context/provider";
+export const metadata: Metadata = {
+  title: "Profile",
+  description: "Log in to fully experience Get it Done!",
+};
 
 const Profile = () => {
-  const { name, role } = useAuthContext();
   return (
     <div className="container">
-      <h2>{role === "Admin" ? "Admin" : "User"} Profile</h2>
-      <p>Hello. You are logged in as a {role}. This means you can: </p>
-      {role === "Admin" ? (
-        <ul>
-          <li>Delete user accounts</li>
-          <li>Create and assign tasks to others.</li>
-        </ul>
-      ) : (
-        <ul>
-          <li>Create and assing tasks to yourself</li>
-          <li>View other's tasks.</li>
-        </ul>
-      )}
+      <UserProfile />
     </div>
   );
 };

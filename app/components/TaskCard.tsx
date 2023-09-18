@@ -15,6 +15,10 @@ const TaskCard = ({ task }: { task: Task }) => {
     try {
       const res = await fetch(`${url}/api/tasks/${task.id}`, {
         method: "DELETE",
+        credentials: "include",
+        headers: {
+          Authorization: "Bearer bla bla",
+        },
       });
 
       router.refresh();

@@ -17,6 +17,7 @@ const NavLinks = () => {
       const res = await fetch(`${url}/api/users/logout`);
       const json = await res.json();
 
+      router.push("/");
       setRole("");
       setAccessToken("");
 

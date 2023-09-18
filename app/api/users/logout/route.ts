@@ -9,7 +9,6 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ error: "No token." }, { status: 400 });
   }
 
-  console.log("Working");
   // Find user in db
   // If no user: clear jwt cookie
   // If user: delete refreshToken in db and THEN clear cookie.

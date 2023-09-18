@@ -4,8 +4,14 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
 
 const url = "http://localhost:3000";
+
+export const metadata: Metadata = {
+  title: "Register",
+  description: "Create an account.",
+};
 
 const Register = () => {
   const {

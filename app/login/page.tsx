@@ -3,7 +3,7 @@ import LoginComponent from "./LoginComponent";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GID - Login",
+  title: "Login",
   description: "Log in to fully experience Get it Done!",
 };
 
