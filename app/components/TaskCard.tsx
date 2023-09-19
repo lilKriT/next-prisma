@@ -2,7 +2,7 @@
 import { useAuthContext } from "@/lib/context/provider";
 import { Task } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 
 const url = process.env.NEXT_PUBLIC_URL;
@@ -10,6 +10,7 @@ const url = process.env.NEXT_PUBLIC_URL;
 const TaskCard = ({ task }: { task: Task }) => {
   const router = useRouter();
   const { id, role } = useAuthContext();
+  const [canDelete, setCanDelete] = useState(false);
 
   const deleteTask = async () => {
     console.log(`Deleting ${task.id}`);
@@ -29,20 +30,34 @@ const TaskCard = ({ task }: { task: Task }) => {
     }
   };
 
-  const canDelete = () => {
+  console.log("Role: ", role, " id: ", id, " task userid: ", task.userId);
+  // i have to wait for id (not task user id)
+  // const canDelete = () => {
+  //   if (role === "Admin") {
+  //     return true;
+  //   }
+  //   if (id && task.userId === +id) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
+  useEffect(() => {
     if (role === "Admin") {
-      return true;
+      setCanDelete(true);
+      return;
     }
     if (id && task.userId === +id) {
-      return true;
+      setCanDelete(true);
+      return;
     }
-    return false;
-  };
+    setCanDelete(false);
+  }, [id, role]);
 
   return (
     <div className="taskCard">
       <h2>{task.title}</h2>
-      {canDelete() && (
+      {canDelete && (
         <button onClick={deleteTask} className="btn btn--danger btn--small">
           <AiFillDelete />
         </button>

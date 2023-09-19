@@ -30,6 +30,7 @@ export const POST = async (request: NextRequest) => {
     // Get roles
     const name = user.name;
     const role = user.role;
+    const id = user.id;
 
     // Create access token
     const accessSecret = new TextEncoder().encode(process.env.ACCESS_SECRET);
@@ -67,7 +68,13 @@ export const POST = async (request: NextRequest) => {
     });
     // Do I need other options, like "secure" or "path"?
     // Return access token
-    return NextResponse.json({ msg: "Logged in.", accessToken, name, role });
+    return NextResponse.json({
+      msg: "Logged in.",
+      accessToken,
+      name,
+      role,
+      id,
+    });
   } else {
     return NextResponse.json({ error: "Invalid password." }, { status: 400 });
   }
