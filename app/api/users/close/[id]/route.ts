@@ -17,7 +17,8 @@ export async function DELETE(
     return NextResponse.json({ error: `No role` }, { status: 400 });
   }
 
-  if (role === "Admin" || (role === "User" && id === userId)) {
+  console.log(`Id: ${id} userId: ${userId} role: ${role}`);
+  if (role === "Admin" || (role === "User" && +id === userId)) {
     try {
       const userToDelete = await usePrisma.user.findFirst({
         where: { id: +id },
