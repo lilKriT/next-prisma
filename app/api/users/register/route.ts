@@ -1,6 +1,7 @@
 import { usePrisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { revalidatePath } from "next/cache";
 
 export const POST = async (request: NextRequest) => {
   const json = await request.json();
@@ -24,6 +25,7 @@ export const POST = async (request: NextRequest) => {
     const userData = { name: json.name, password: hashed };
 
     const user = await usePrisma.user.create({ data: userData });
+    revalidatePath("/");
     return NextResponse.json(user);
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 });

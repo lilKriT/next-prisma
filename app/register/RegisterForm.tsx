@@ -49,6 +49,7 @@ const RegisterForm = () => {
         password: "",
         confirmPassword: "",
       });
+      router.refresh();
       router.push("/"); // Where to send user?
     }
   }, [isSubmitSuccessful, reset, router]);
