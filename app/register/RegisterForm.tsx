@@ -3,7 +3,7 @@
 const url = process.env.NEXT_PUBLIC_URL;
 
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
