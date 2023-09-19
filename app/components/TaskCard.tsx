@@ -30,7 +30,7 @@ const TaskCard = ({ task }: { task: Task }) => {
     }
   };
 
-  console.log("Role: ", role, " id: ", id, " task userid: ", task.userId);
+  // console.log("Role: ", role, " id: ", id, " task userid: ", task.userId);
   // i have to wait for id (not task user id)
   // const canDelete = () => {
   //   if (role === "Admin") {

@@ -55,6 +55,10 @@ const TaskForm = ({ users }: { users: User[] }) => {
     console.log("Submitted");
   };
 
+  if (!role) {
+    return;
+  }
+
   return (
     <form className="form" onSubmit={(e) => handleSubmit(e)}>
       <label className="formLabel">
