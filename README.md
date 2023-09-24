@@ -70,3 +70,7 @@ etc
 In **powershell** use:
 `(new-guid).guid`
 it will return plain text.
+
+# Useful Links:
+
+[Codevo](https://codevoweb.com/how-to-setup-prisma-orm-in-nextjs-13-app-directory/)
